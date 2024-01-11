@@ -2,7 +2,13 @@ import React from 'react'
 import { useAccount } from 'wagmi'
 import { useChain, useBetTokenBalance } from '@azuro-org/sdk'
 import cx from 'clsx'
+import { Days_One } from 'next/font/google'
 
+
+const daysone = Days_One({
+  subsets: ['latin'],
+  weight: '400'
+});
 
 type Props = {
   amount: string
@@ -22,7 +28,7 @@ export const SubmitButton: React.FC<Props> = (props) => {
 
   if (!account.address) {
     return (
-      <div className="mt-6 py-3.5 text-center bg-red-200 rounded-2xl">
+      <div className={`mt-6 py-3.5 text-center bg-red-200 rounded-2xl ${daysone.className}`}>
         Connect your wallet
       </div>
     )
@@ -72,7 +78,7 @@ export const SubmitButton: React.FC<Props> = (props) => {
         )
       }
       <button
-        className={cx('w-full py-3.5 text-white font-semibold text-center rounded-xl', {
+        className={cx(`w-full py-3.5 text-white font-semibold text-center rounded-xl ${daysone.className}`, {
           'bg-blue-500 hover:bg-blue-600 transition shadow-md': !isDisabled,
           'bg-zinc-300 cursor-not-allowed': isDisabled,
         })}

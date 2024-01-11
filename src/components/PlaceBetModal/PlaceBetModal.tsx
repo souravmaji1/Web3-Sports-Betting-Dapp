@@ -7,6 +7,13 @@ import { getMarketName } from '@azuro-org/dictionaries'
 import { GameInfo } from '@/components'
 import { AmountInput } from './AmountInput'
 import { SubmitButton } from './SubmitButton'
+import { Days_One } from 'next/font/google'
+
+
+const daysone = Days_One({
+  subsets: ['latin'],
+  weight: '400'
+});
 
 
 type Props = {
@@ -50,26 +57,26 @@ export function PlaceBetModal(props: Props) {
       onClick={closeModal}
     >
       <div
-        className="w-[480px] bg-white max-h-[calc(100vh-40px)] overflow-y-auto no-scrollbar rounded-md shadow-2xl"
+        className="w-[480px] bg-zinc-700 max-h-[calc(100vh-40px)] overflow-y-auto no-scrollbar rounded-md shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
         {
           isSuccess ? (
-            <div className="flex flex-col items-center justify-center h-[400px]">
+            <div className="flex flex-col items-center justify-center h-[400px]" style={{borderRadius:'10px', border:'3px solid white'}}>
               <CheckBadgeIcon className="w-28 h-28 text-purple-500" />
-              <div className="mt-5 text-2xl font-semibold">Success!</div>
+              <div className={`mt-5 text-2xl font-semibold text-white ${daysone.className}`}>Success!</div>
             </div>
           ) : (
             <>
              
-              <div className="pt-4 px-6 pb-6">
-                <div className="grid grid-cols-[auto_1fr] gap-y-3 mt-2 text-md">
-                  <span className="text-zinc-400">Market</span>
-                  <span className="text-right font-semibold">{marketName}</span>
-                  <span className="text-zinc-400">Selection</span>
-                  <span className="text-right font-semibold">{outcome.selectionName}</span>
-                  <span className="text-zinc-400">Odds</span>
-                  <span className="text-right font-semibold">
+              <div className="pt-4 px-6 pb-6" style={{border:'3px solid gray'}}>
+                <div className="grid grid-cols-[auto_1fr] gap-y-3 mt-2 text-md ">
+                  <span className={`text-zinc-400 ${daysone.className}`}>Market</span>
+                  <span className={`text-right font-semibold ${daysone.className} `}>{marketName}</span>
+                  <span className={`text-zinc-400 ${daysone.className} `}>Selection</span>
+                  <span className={`text-right font-semibold ${daysone.className} `}>{outcome.selectionName}</span>
+                  <span className={`text-zinc-400 ${daysone.className} `}>Odds</span>
+                  <span className={`text-right font-semibold ${daysone.className}  `}>
                     {isOddsLoading ? 'Loading...' : (
                       totalOdds !== undefined ? (
                         <>{(+totalOdds).toFixed(3)}</>

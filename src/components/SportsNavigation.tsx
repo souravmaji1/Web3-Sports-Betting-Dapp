@@ -52,7 +52,7 @@ export function SportsNavigation() {
                 return (
                   <ActiveLink
                     key={slug}
-                    className={`flex items-center py-2 px-4 gap-1  whitespace-nowrap m-3 w-72 rounded-md  border-b text-gray-500 border-gray-400 ${daysone.className}`}
+                    className={`flex items-center py-2 px-4 gap-1 bg-zinc-700  whitespace-nowrap m-3 w-72 rounded-md  border-b text-gray-500 border-gray-400 ${daysone.className}`}
                     activeClassName="!bg-purple-200"
                     href={`/events/${slug}`}
                   >

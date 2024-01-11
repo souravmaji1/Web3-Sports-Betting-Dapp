@@ -2,9 +2,9 @@
 import React from 'react';
 import { type Bet, useRedeemBet } from '@azuro-org/sdk'
 import cx from 'clsx';
-import BettingImage from '../../public/betting.png'
 import Image from 'next/image';
 import { Days_One } from 'next/font/google'
+import Betting from '../../public/images/betting.png'
 
 
 const daysone = Days_One({
@@ -46,7 +46,7 @@ export function RedeemAll(props: Props) {
 
   return (
     <div>
-       <Image style={{width:'100%',padding:'3px'}} src={BettingImage} alt="" />
+       <Image style={{width:'100%',padding:'3px'}} width={1000} height={300} src="/images/betting.png" alt="" />
     <button
       className={cx(`py-3.5 text-white font-semibold text-center rounded mb-4 w-full ${daysone.className}`, {
         'bg-blue-500 hover:bg-blue-600 transition shadow-md ': !isDisabled,

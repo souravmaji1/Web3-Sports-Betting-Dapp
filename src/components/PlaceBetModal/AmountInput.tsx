@@ -1,6 +1,12 @@
 import React from 'react'
 import { useChain, useBetTokenBalance } from '@azuro-org/sdk'
+import { Days_One } from 'next/font/google'
 
+
+const daysone = Days_One({
+  subsets: ['latin'],
+  weight: '400'
+});
 
 type Props = {
   amount: string
@@ -16,7 +22,7 @@ export const AmountInput: React.FC<Props> = (props) => {
   return (
     <div className="mt-4 pt-4 border-t border-zinc-300 space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-md text-zinc-400">Wallet balance</span>
+        <span className={`text-md text-zinc-400 ${daysone.className}`}>Wallet balance</span>
         <span className="text-md font-semibold">
           {
             isBalanceFetching ? (
@@ -32,7 +38,7 @@ export const AmountInput: React.FC<Props> = (props) => {
         </span>
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-md text-zinc-400">Bet amount</span>
+        <span className={`text-md text-zinc-400 ${daysone.className} `}>Bet amount</span>
         <input
           className="w-[140px] py-2 px-4 border border-zinc-400 text-md text-right font-semibold rounded-md"
           type="number"

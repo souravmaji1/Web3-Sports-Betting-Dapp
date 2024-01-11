@@ -12,4 +12,4 @@ export * from './Watchers'
 export * from './OutcomeButton'
 export * from './BetCard'
 export * from './RedeemAll'
-export * from './Home'
+

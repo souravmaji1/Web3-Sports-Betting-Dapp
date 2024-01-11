@@ -2,7 +2,7 @@
 import { useBets, OrderDirection } from '@azuro-org/sdk';
 import { useAccount } from 'wagmi';
 import { BetCard, RedeemAll } from '@/components';
-import Home from './Home'
+
 
 const useData = () => {
   const { address } = useAccount()
