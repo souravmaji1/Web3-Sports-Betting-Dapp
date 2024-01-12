@@ -46,7 +46,7 @@ export function RedeemAll(props: Props) {
 
   return (
     <div>
-       <Image style={{width:'100%',padding:'3px'}} width={1000} height={300} src="/images/betting.png" alt="" />
+       <Image style={{width:'100%',padding:'3px'}} width={1000} height={300} src="/images/betting.PNG" alt="" />
     <button
       className={cx(`py-3.5 text-white font-semibold text-center rounded mb-4 w-full ${daysone.className}`, {
         'bg-blue-500 hover:bg-blue-600 transition shadow-md ': !isDisabled,

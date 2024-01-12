@@ -39,7 +39,7 @@ export default function Events() {
           <div>Loading...</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-zinc-800" style={{ display: 'flow', marginTop: '-1087px', marginLeft: '321px',maxHeight: '1055px', overflowY: 'auto' }}  >
-             <Image style={{ padding:'3px 3px 10px'}} width={1010} height={300} src="/images/betting.png" alt="" />
+             <Image style={{ padding:'3px 3px 10px'}} width={1010} height={300} src="/images/betting.PNG" alt="" />
             {
               data?.games.map((game) => (
                 <GameCard key={game.id} game={game} />
