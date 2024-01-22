@@ -2,20 +2,20 @@
 import React from 'react'
 import { ChainProvider } from '@azuro-org/sdk'
 import { ApolloProvider } from '@azuro-org/sdk/nextjs/apollo'
-import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit'
+import { RainbowKitProvider, getDefaultWallets, lightTheme } from '@rainbow-me/rainbowkit'
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { polygonMumbai, arbitrumGoerli } from 'viem/chains'
+import { polygonMumbai, arbitrumGoerli, polygon } from 'viem/chains'
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 import { publicProvider } from 'wagmi/providers/public'
 import {NextUIProvider} from '@nextui-org/react'
 
 const rpcUrls: Record<number, string> = {
   [polygonMumbai.id]: 'https://rpc.ankr.com/polygon_mumbai',
-  [arbitrumGoerli.id]: 'https://arbitrum-goerli.publicnode.com',
+  [polygon.id]: 'https://rpc.ankr.com/polygon',
 }
 
 const { chains, publicClient } = configureChains(
-  [ polygonMumbai, arbitrumGoerli ],
+  [ polygonMumbai, polygon ],
   [
     jsonRpcProvider({
       rpc: (chain) => ({
@@ -43,8 +43,10 @@ export function Providers(props: { children: React.ReactNode }) {
   return (
     <NextUIProvider>
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
-        <ChainProvider initialChainId={polygonMumbai.id}>
+      <RainbowKitProvider theme={lightTheme({
+        accentColor: '#e75109',
+       })} chains={chains}>
+        <ChainProvider initialChainId={polygon.id}>
           <ApolloProvider>
             {children}
           </ApolloProvider>

@@ -3,6 +3,7 @@ import { useParams } from 'next/navigation'
 import { useGame, useGameMarkets } from '@azuro-org/sdk'
 import { GameInfo, GameMarkets } from '@/components'
 import {  SportsNavigation } from '@/components'
+import Foots from '../../../../components/footer';
 
 const Info = () => {
   const params = useParams()
@@ -43,7 +44,7 @@ const Markets = () => {
 
   console.log(data);
 
-  return <><SportsNavigation /><GameMarkets markets={data!} /> </>
+  return <><SportsNavigation /><GameMarkets markets={data!} /> <Foots /> </>
 }
 
 export default function Game() {

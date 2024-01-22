@@ -1,6 +1,7 @@
 import '@rainbow-me/rainbowkit/styles.css'
 import './globals.css'
 import { Providers, Header, Watchers } from '@/components'
+import { ChakraProvider } from '@chakra-ui/react'
 
 
 export default function RootLayout(props: { children: React.ReactNode }) {
@@ -8,7 +9,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
+      <head>
+      <script src="https://widget.mtpelerin.com/mtp-widget.js"></script>
+      </head>
       <body>
+        <ChakraProvider>
         <Providers>
           <Header />
           <main>
@@ -16,6 +21,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           </main>
           <Watchers />
         </Providers>
+        </ChakraProvider>
       </body>
     </html>
   )

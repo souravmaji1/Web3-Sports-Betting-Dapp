@@ -5,7 +5,13 @@ import { FaBasketballBall, FaBaseballBall, FaGolfBall, FaHome, FaFootballBall } 
 import { IconType } from 'react-icons';
 import { Days_One } from 'next/font/google'
 import { useEffect, useState } from 'react';
-
+import {
+  Modal,
+  ModalContent,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/react'
 
 const daysone = Days_One({
   subsets: ['latin'],
@@ -22,12 +28,15 @@ const sportIcons: Record<string, IconType> = {
   // Add more as needed
 };
 
-export function SportsNavigation() {
+export default function SportsNavigation() {
   const { loading, data } = useSportsNavigation({
     withGameCount: true,
   })
 
+  console.log(data);
+
   const [isMobile, setIsMobile] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,13 +60,17 @@ export function SportsNavigation() {
   }
 
   return (
-    
-    <div>
-    <div className="w-80 mb-8 overflow-hidden bg-black"  style={{ width: isMobile ? 'auto' : '' }}  >
+    <>
+     <Button sx={{fontWeight:'100'}}  onClick={onOpen}>
+        Categories
+     </Button>
+
+        <Modal isOpen={isOpen} onClose={onClose}  >
+        <ModalContent>
+          
+    <div className="w-80  overflow-hidden bg-black rounded-md "  style={{ width: isMobile ? 'auto' : '', margin:'10px auto 8px' }}  >
       <div className="overflow-x-auto no-scrollbar">
-        <div className={`flex flex-col items-start ${
-          isMobile ? 'flex flex-col items-start ml-[-500px]' : ' '
-        }   `}>
+        <div className={`flex flex-col items-start `}>
           <ActiveLink
             className={`flex items-center py-2 px-4 bg-zinc-100 gap-1 whitespace-nowrap m-3 rounded-md w-72  ${daysone.className}`}
             activeClassName="!bg-purple-200"
@@ -94,7 +107,15 @@ export function SportsNavigation() {
         </div>
       </div>
     </div>
-    </div>
+    <ModalFooter>
+                <Button sx={{margin:'auto',background:'black',color:'white'}} color="danger" variant="light"  onClick={onClose}>
+                  Close
+                </Button>
+               
+              </ModalFooter>
     
+      </ModalContent>
+      </Modal>
+    </>
   )
 }

@@ -2,10 +2,12 @@
 import { useBets, OrderDirection } from '@azuro-org/sdk';
 import { useAccount } from 'wagmi';
 import { BetCard, RedeemAll, SportsNavigation } from '@/components';
-
+import { useState, useEffect } from 'react';
+import Foots from '../../components/footer';
 
 const useData = () => {
   const { address } = useAccount()
+
 
   const props = {
     filter: {
@@ -19,6 +21,24 @@ const useData = () => {
 
 export default function Bets() {
   const { loading, data } = useData()
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check on component mount
+    handleResize();
+
+    // Attach event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>
@@ -27,7 +47,7 @@ export default function Bets() {
   if (!data?.length) {
     return  <div> 
     <SportsNavigation />
-  <div  className='bg-zinc-800'  style={{ display: 'flow', marginTop: '-1087px', marginLeft: '321px',maxHeight: '1055px', overflowY: 'auto' }}  >
+  <div  className='bg-zinc-800'  style={{ display: 'flow', marginTop: '-1022px', marginLeft: isMobile ? '0' : '321px',maxHeight: '990px', overflowY: 'auto' }}  >
     <RedeemAll bets={data} />
     <div style={{margin:"5px",paddingBottom:'1000px',paddingTop:'51px',textAlign:'center',maxHeight:'1055px',background:'#4a4949'}}>
       <div>
@@ -35,13 +55,14 @@ export default function Bets() {
       </div>
     </div>
   </div>
+  <Foots />
   </div>
   }
 
   return (
     <div> 
       <SportsNavigation />
-    <div  className='bg-zinc-800'  style={{ display: 'flow', marginTop: '-1087px', marginLeft: '321px',maxHeight: '1055px', overflowY: 'auto' }}  >
+    <div  className='bg-zinc-800'  style={{ display: 'flow', marginTop: '-1022px', marginLeft: isMobile ? '0' : '321px',maxHeight: '990px', overflowY: 'auto' }}  >
       <RedeemAll bets={data} />
       {
         data.map(bet => (
@@ -49,6 +70,7 @@ export default function Bets() {
         ))
       }
     </div>
+    <Foots />
     </div>
   )
 }

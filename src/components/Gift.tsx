@@ -1,10 +1,17 @@
 import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { FaGift } from "react-icons/fa";
 import { Days_One } from 'next/font/google'
 import { Dela_Gothic_One } from 'next/font/google'
 import { MdOutlineArrowOutward } from "react-icons/md";
-
+import {
+  Modal,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  Button,
+  ModalBody,
+  useDisclosure,
+} from '@chakra-ui/react'
 
 const daysone = Days_One({
   subsets: ['latin'],
@@ -17,17 +24,16 @@ const dela = Dela_Gothic_One({
 });
 
 export default function App() {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <Button className="bg-white rounded-md" onPress={onOpen}>
-        <FaGift /> FREE BET
+      <Button className="bg-white rounded-md" sx={{fontWeight:'100'}} onClick={onOpen}>
+         FREE BET
         </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} style={{display:'flex',justifyContent:"space-evenly",alignItems:'center'}}  >
+      <Modal isOpen={isOpen} onClose={onClose}   >
         <ModalContent   >
-          {(onClose) => (
-            <>
+          
               <ModalHeader className={`flex flex-col gap-1 ${dela.className}`}>My Sports Freebets</ModalHeader>
               <ModalBody>
                 <p> 
@@ -40,22 +46,22 @@ export default function App() {
                   Nullam pulvinar risus non risus hendrerit venenatis.
                   Pellentesque sit amet hendrerit risus, sed porttitor quam.
                 </p>
-               
-                <Button color="primary">
+                <br></br>
+                <Button sx={{margin:'auto',display:'flex',background:'#0089ff',color:'white'}} color="danger" variant="light" >
                   <a href="https://twitter.com">
                   Upcoming Campaigns
                   </a>
                   <MdOutlineArrowOutward />
                 </Button>
-                <Button className="bg-black text-white" onPress={onClose}>
+                <br></br>
+                <Button sx={{margin:'auto',display:'flex',background:'black',color:'white'}} color="danger" variant="light"  onClick={onClose}>
                   Close
                 </Button>
               </ModalBody>
               <ModalFooter>
                 
               </ModalFooter>
-            </>
-          )}
+            
         </ModalContent>
       </Modal>
     </>

@@ -1,3 +1,13 @@
+import { Days_One } from 'next/font/google'
+
+
+const daysone = Days_One({
+  subsets: ['latin'],
+  weight: '400'
+});
+
+
+
 type Props = {
   image?: string | null
   name: string
@@ -15,7 +25,7 @@ export function ParticipantLogo(props: Props) {
           )
         }
       </div>
-      <span className="max-w-[210px] mt-3 text-lg text-center">{name}</span>
+      <span className={`max-w-[210px] mt-3 text-lg text-center text-white ${daysone.className}`}>{name}</span>
     </div>
   )
 }

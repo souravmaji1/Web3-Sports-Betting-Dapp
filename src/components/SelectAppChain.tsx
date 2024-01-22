@@ -1,6 +1,6 @@
 'use client'
 import { useChain, type ChainId } from '@azuro-org/sdk';
-import { polygonMumbai, arbitrumGoerli } from 'viem/chains';
+import { polygonMumbai, arbitrumGoerli, polygon } from 'viem/chains';
 import { Days_One } from 'next/font/google'
 
 
@@ -18,8 +18,7 @@ export function SelectAppChain() {
 
   return (
     <select className={`mr-4 cursor-pointer rounded-lg ${daysone.className}`} value={appChain.id} onChange={handleChange}>
-      <option value={polygonMumbai.id}>{polygonMumbai.name}</option>
-      <option value={arbitrumGoerli.id}>{arbitrumGoerli.name}</option>
+      <option value={polygon.id}>{polygon.name}</option>
     </select>
   )
 }

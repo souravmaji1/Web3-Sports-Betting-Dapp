@@ -5,18 +5,26 @@ import { ActiveLink, SelectAppChain } from '@/components'
 import { useConfig } from 'wagmi';
 import { Days_One } from 'next/font/google'
 import Gift from './Gift'
-import Mobilebar from './MobileNav'
-import Image from 'next/image';
+
+import MobileCategories from './MobileCate';
+import {
+  Modal,
+  ModalContent,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/react'
 
 const daysone = Days_One({
   subsets: ['latin'],
   weight: '400'
 });
 
-export function Header() {
+export default function Header() {
   const config = useConfig()
 
   const [isMobile, setIsMobile] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     const handleResize = () => {
@@ -45,20 +53,27 @@ export function Header() {
   }, [])
 
   return (
-    <header className={`p-6 bg-black flex items-center py-3.5 border-b border-zinc-200 flex-wrap justify-between`} style={{ width: isMobile ? 'auto' : '' }}>
-      <div className={`text-white font-semibold  ${daysone.className}`}>
-        <a href="/">
-          <Image src='/images/logo.png' width={100} height={100} alt='' />
-          
-          </a></div>
+    <>
+
+   
+      <Button onClick={onOpen}> <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg></Button>
+      <Modal isOpen={isOpen} onClose={onClose} >
+        <ModalContent>
+         
+      <div className={`ml-auto contents items-center ${daysone.className}`}>
      
-      {isMobile ? (
-        <Mobilebar />
-      ) : (
-      <div className={`ml-auto flex items-center ${daysone.className}`}>
       <Gift />
-      <div className="flex ml-10" style={{padding:'7px 26px 7px 7px', background:'white', borderRadius:'5px',marginRight:'25px'}}>
-       
+      
+      <div className="flex ml-10" style={{padding:'7px 26px 7px 7px', background:'white', borderRadius:'5px',margin:'auto'}}>
+      
         <ActiveLink
           className={`text-black hover:text-black transition ml-4 ${daysone.className}`}
           activeClassName="!text-gray-800 font-semibold !cursor-default"
@@ -67,11 +82,29 @@ export function Header() {
         >
           BETS
         </ActiveLink>
+       
       </div>
+    
+      <MobileCategories />
+      <br>
+      </br>
         <SelectAppChain />
+        <br></br>
+        <div style={{margin:"auto"}}>
         <ConnectButton chainStatus="none"  />
+        </div>
+        
       </div>
-      )}
-    </header>
+      <ModalFooter>
+                <Button  sx={{margin:'auto',background:'black',color:'white'}}   color="danger" variant="light" onClick={onClose}>
+                  Close
+                </Button>
+               
+              </ModalFooter>
+      
+      </ModalContent>
+      </Modal>
+    
+    </>
   )
 }
